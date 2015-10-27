@@ -1,0 +1,58 @@
+OFFLINE=No
+RECLONE=No
+# Credentials
+ADMIN_PASSWORD=pass
+DATABASE_PASSWORD=pass
+RABBIT_PASSWORD=pass
+SERVICE_PASSWORD=pass
+SERVICE_TOKEN=pass
+HOST_IP=192.168.56.56
+SERVICE_HOST=192.168.56.56
+ENABLED_SERVICES=True
+# Ensure we are using neutron networking rather than nova networking
+# (Neutron is enabled by default since Kilo)
+disable_service n-net
+enable_service q-svc
+#enable_service q-agt
+enable_service q-dhcp
+enable_service q-l3
+enable_service q-meta
+enable_service neutron
+enable_service key
+enable_service mysql
+enable_service rabbit
+enable_service horizon
+enable_service n-api
+enable_service n-cond
+enable_service n-sch
+
+# Log all output to files
+LOGFILE=$HOME/devstack.log
+SCREEN_LOGDIR=$HOME/logs
+
+enable_plugin networking-ovn http://git.openstack.org/openstack/networking-ovn
+enable_service ovn-northd
+enable_service ovn-controller
+disable_service q-agt
+
+#Q_USE_SECGROUP=True
+#FLOATING_RANGE="192.168.56.0/24"
+#FIXED_RANGE="10.0.0.0/24"
+#Q_FLOATING_ALLOCATION_POOL=start=192.168.56.150,end=192.168.56.200
+#PUBLIC_NETWORK_GATEWAY="192.168.56.1"
+#Q_L3_ENABLED=True
+#PUBLIC_INTERFACE=eth1
+#Q_USE_PROVIDERNET_FOR_PUBLIC=True
+#OVS_PHYSICAL_BRIDGE=br-ex
+#PUBLIC_BRIDGE=br-ex
+#OVS_BRIDGE_MAPPINGS=public:br-ex
+
+#Q_USE_PROVIDERNET_FOR_PUBLIC=True
+#PUBLIC_PHYSICAL_NETWORK=public
+#OVS_BRIDGE_MAPPINGS=public:br-ex
+#PUBLIC_BRIDGE=br-ex
+PUBLIC_INTERFACE=eth1
+PUBLIC_NETWORK_GATEWAY="192.168.56.56"
+#Q_USE_PUBLIC_VETH=True
+FLOATING_RANGE="192.168.56.0/24"
+Q_FLOATING_ALLOCATION_POOL=start=192.168.56.150,end=192.168.56.200
